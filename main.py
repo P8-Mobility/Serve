@@ -71,6 +71,3 @@ if __name__ == '__main__':
     classifier = classifier.Classifier(config)
     if classifier.load_models():
         app.run(port=int(config['WEB']['port']), host=str(config['WEB']['host']))
-
-
-
