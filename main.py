@@ -7,7 +7,6 @@ import classifier
 from processing.audio import Audio
 import processing.audio as audio
 import processing.transformer as transformer
-import pre_processing
 
 config_file = "config.cfg"
 app = Flask(__name__)
@@ -52,7 +51,7 @@ def predict():
         os.remove(filepath)
 
     # 6) Return success or error depending on prediction
-    return jsonify({'status': 'OK', 'message': 'File saved!'})
+    return jsonify({'status': 'OK', 'result': result})
 
 
 def allowed_file_type(filename, allowed_type):
