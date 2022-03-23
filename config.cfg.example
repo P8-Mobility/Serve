@@ -1,12 +1,8 @@
 [WEB]
-Port = 8080
-Host = 127.0.0.1
-Verbose = False
+port = 8080
+host = 127.0.0.1
+verbose = False
 
-[EXERCISE_CLASSIFIER]
-NumberOfThreads = 1
-Verbose = False
-Model = exercise_classifier_model.joblib
-
-[ERROR_CLASSIFIER]
-Models = ["632f7250-4008-4380-baaf-254842cb8a06.pth", "8d8ed1c2-7926-4dac-8e23-b00937477f06.pth", "e6f6eeda-062d-48fc-afbf-f68c7238bcb4.pth", "fe4e28a7-86d6-4f5e-8a3e-f6468c33fe01.pth"]
+[UPLOAD]
+folder = uploads
+allowed_type = wav
