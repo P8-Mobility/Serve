@@ -24,8 +24,8 @@ def predict():
     if file.filename == '':
         return jsonify({'status': 'FAILED', 'message': 'No file selected'})
 
-    if not file or not allowed_file_type(file.filename, config['UPLOAD']['allowed_type']):
-        return jsonify({'status': 'FAILED', 'message': 'File type is not allowed'})
+    #if not file or not allowed_file_type(file.filename, config['UPLOAD']['allowed_type']):
+    #    return jsonify({'status': 'FAILED', 'message': 'File type is not allowed'})
 
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -51,8 +51,8 @@ def predict():
     result = classifier.predict_word(audio_file)
 
     # 5) Clean up
-    if os.path.exists(filepath):
-        os.remove(filepath)
+    #if os.path.exists(filepath):
+    #    os.remove(filepath)
 
     # 6) Return success or error depending on prediction
     return jsonify({'status': 'OK', 'result': result})
