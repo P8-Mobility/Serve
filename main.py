@@ -51,8 +51,8 @@ def predict():
     result = classifier.predict_word(audio_file)
 
     # 5) Clean up
-    #if os.path.exists(filepath):
-    #    os.remove(filepath)
+    if os.path.exists(filepath):
+        os.remove(filepath)
 
     # 6) Return success or error depending on prediction
     return jsonify({'status': 'OK', 'result': result})
@@ -65,6 +65,7 @@ def allowed_file_type(filename, allowed_type):
 def convert_file(filepath):
     new_file = filepath[:len(filepath) - 4]
     os.system('ffmpeg -i {} -vn -acodec pcm_s16le -ar 44100 {}.wav'.format(filepath, new_file))
+    os.remove(filepath)
     return new_file+".wav"
 
 
