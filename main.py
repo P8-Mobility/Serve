@@ -35,6 +35,10 @@ def predict():
     if not os.path.isfile(filepath):
         return jsonify({'status': 'FAILED', 'message': 'File was not saved...'})
 
+    # Check file type
+    if filename.endswith(".mp4"):
+        filepath = convert_file(filepath)
+
     audio_file = audio.load(filepath)
 
     # 3) Preprocessering
@@ -56,6 +60,12 @@ def predict():
 
 def allowed_file_type(filename, allowed_type):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() == allowed_type
+
+
+def convert_file(filepath):
+    new_file = filepath[:len(filepath) - 4]
+    os.system('ffmpeg -i {} -acodec pcm_s16le -ar 44100 {}.wav'.format(filepath, new_file))
+    return new_file
 
 
 if __name__ == '__main__':
