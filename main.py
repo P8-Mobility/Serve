@@ -65,7 +65,7 @@ def allowed_file_type(filename, allowed_type):
 def convert_file(filepath):
     new_file = filepath[:len(filepath) - 4]
     os.system('ffmpeg -i {} -acodec pcm_s16le -ar 44100 {}.wav'.format(filepath, new_file))
-    return new_file
+    return new_file+".wav"
 
 
 if __name__ == '__main__':
