@@ -14,7 +14,6 @@ app = Flask(__name__)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-
     # 1) Fetch and prepare file
     if 'file' not in request.files:
         return jsonify({'status': 'FAILED', 'message': 'No audio file attached'})
@@ -24,7 +23,7 @@ def predict():
     if file.filename == '':
         return jsonify({'status': 'FAILED', 'message': 'No file selected'})
 
-    #if not file or not allowed_file_type(file.filename, config['UPLOAD']['allowed_type']):
+    # if not file or not allowed_file_type(file.filename, config['UPLOAD']['allowed_type']):
     #    return jsonify({'status': 'FAILED', 'message': 'File type is not allowed'})
 
     filename = secure_filename(file.filename)
@@ -66,7 +65,7 @@ def convert_file(filepath):
     new_file = filepath[:len(filepath) - 4]
     os.system('ffmpeg -i {} -vn -acodec pcm_s16le -ar 44100 {}.wav'.format(filepath, new_file))
     os.remove(filepath)
-    return new_file+".wav"
+    return new_file + ".wav"
 
 
 if __name__ == '__main__':
@@ -79,6 +78,8 @@ if __name__ == '__main__':
     # Setup upload folder
     app.config['UPLOAD_FOLDER'] = config['UPLOAD']['folder']
 
+    print(config.getboolean("WEB", "local"))
+
     classifier = classifier.Classifier(config)
-    if classifier.load_models():
+    if classifier.load_models() and config.getboolean("WEB", "local"):
         app.run(port=int(config['WEB']['port']), host=str(config['WEB']['host']))
