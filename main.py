@@ -41,9 +41,9 @@ def predict():
     audio_file = audio.load(filepath)
 
     # 3) Preprocessering
-    transformer.remove_noise(audio_file)
-    transformer.normalize(audio_file)
-    transformer.trim(audio_file, 20)
+    #transformer.remove_noise(audio_file)
+    #transformer.normalize(audio_file)
+    transformer.trim(audio_file, 25)
     audio_file.save(filepath)
 
     # 4) Predict
@@ -77,8 +77,6 @@ if __name__ == '__main__':
 
     # Setup upload folder
     app.config['UPLOAD_FOLDER'] = config['UPLOAD']['folder']
-
-    print(config.getboolean("WEB", "local"))
 
     classifier = classifier.Classifier(config)
     if classifier.load_models() and config.getboolean("WEB", "local"):
