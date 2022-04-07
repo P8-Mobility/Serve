@@ -23,9 +23,6 @@ def predict():
     if file.filename == '':
         return jsonify({'status': 'FAILED', 'message': 'No file selected'})
 
-    # if not file or not allowed_file_type(file.filename, config['UPLOAD']['allowed_type']):
-    #    return jsonify({'status': 'FAILED', 'message': 'File type is not allowed'})
-
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     filepath = app.config['UPLOAD_FOLDER'] + "/" + filename
@@ -42,14 +39,12 @@ def predict():
 
     # 3) Preprocessering
     #transformer.remove_noise(audio_file)
-    #transformer.normalize(audio_file)
     transformer.trim(audio_file, 25)
-    audio_file.save(filepath)
 
     # 4) Predict
     result = classifier.predict_word(audio_file)
 
-    # 5) Clean up
+    # 5) Housekeeping
     if os.path.exists(filepath):
         os.remove(filepath)
 
