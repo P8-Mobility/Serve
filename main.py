@@ -12,6 +12,17 @@ config_file = "config.cfg"
 app = Flask(__name__)
 
 
+@app.route('/models', methods=['GET'])
+def models():
+    the_models = []
+
+    for dirname in os.listdir("models/"):
+        if dirname != ".gitkeep":
+            the_models.append(dirname)
+
+    return jsonify({'status': 'OK', 'result': the_models})
+
+
 @app.route('/predict', methods=['POST'])
 def predict():
     # 1) Fetch and prepare file
@@ -19,6 +30,13 @@ def predict():
         return jsonify({'status': 'FAILED', 'message': 'No audio file attached'})
 
     file = request.files['file']
+
+    # Args
+    args = request.form
+    model = args.get('model')
+
+    if model is None:
+        model = ""
 
     if file.filename == '':
         return jsonify({'status': 'FAILED', 'message': 'No file selected'})
@@ -38,18 +56,18 @@ def predict():
     audio_file = audio.load(filepath)
 
     # 3) Preprocessering
-    #transformer.remove_noise(audio_file)
+    # transformer.remove_noise(audio_file)
     transformer.trim(audio_file, 25)
 
     # 4) Predict
-    result = classifier.predict_word(audio_file)
+    result, model = classifier.predict_word(audio_file, model)
 
     # 5) Housekeeping
     if os.path.exists(filepath):
         os.remove(filepath)
 
     # 6) Return success or error depending on prediction
-    return jsonify({'status': 'OK', 'result': result})
+    return jsonify({'status': 'OK', 'result': result, 'model': model})
 
 
 def allowed_file_type(filename, allowed_type):
