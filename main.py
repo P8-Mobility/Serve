@@ -57,7 +57,7 @@ def predict():
 
     # 3) Preprocessering
     # transformer.remove_noise(audio_file)
-    transformer.trim(audio_file, 25)
+    # transformer.trim(audio_file, 25)
 
     # 4) Predict
     result, model = classifier.predict_word(audio_file, model)
