@@ -28,6 +28,16 @@ def words():
     words = lang.words()
     return jsonify({'status': 'OK',  'result': [{key: value} for key, value in words.items()]})
 
+def setup():
+    words = lang.words()
+
+    f = open("language.json", "r")
+    languages = json.loads(f.read())
+    f.close()
+
+    return jsonify({'status': 'OK', 'result': { "words": [{key: value} for key, value in words.items()], "language": languages}}) #ToDo: wip needs to be tested further
+
+
 
 @app.route('/predict', methods=['POST'])
 def predict():

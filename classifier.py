@@ -13,8 +13,6 @@ class Classifier:
         self.other_models = {}
         self.config = config
         self.lang = language
-        self.response_txt_dan = ""
-        self.response_txt_ara = ""
 
     def load_models(self) -> bool:
         self.default_word_model = allo.read_recognizer(alt_model_path=Path('models/' + self.config['MODELS']['word_model']))
@@ -36,8 +34,6 @@ class Classifier:
 
     def prepare_feedback(self, actual_word, prediction):
         actual_phonemes = self.lang.word_phonemes(actual_word)
-        response_dan = ""
-        response_ara = ""
 
         if actual_phonemes == prediction:
             response_dan = self.lang.get("dan", "correct", actual_word)
