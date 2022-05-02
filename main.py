@@ -71,17 +71,17 @@ def predict():
     # transformer.trim(audio_file, 25)
 
     # 4) Predict
-    result, model = classifier.predict_word(audio_file, model)
+    prediction, model = classifier.predict_word(audio_file, model)
 
     # % Prepare feedback
-    classifier.prepare_feedback(word, result)
+    dan, ara = classifier.prepare_feedback(word, prediction)
 
     # 5) Housekeeping
     if os.path.exists(filepath):
         os.remove(filepath)
 
     # 6) Return success or error depending on prediction
-    return jsonify({'status': 'OK', 'result': result, 'model': model})
+    return jsonify({'status': 'OK', 'phonemes': prediction, 'model': model, 'response_target_lang': dan, 'response_native_lang': ara, 'word': word})
 
 
 def allowed_file_type(filename, allowed_type):

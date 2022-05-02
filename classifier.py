@@ -7,7 +7,6 @@ import os
 
 
 class Classifier:
-    
 
     def __init__(self, config: ConfigParser, language):
         self.default_word_model = None
@@ -41,26 +40,36 @@ class Classifier:
         response_ara = ""
 
         if actual_phonemes == prediction:
-            self.response_txt_dan = self.lang.get("dan", "correct")
-            self.response_txt_ara = self.lang.get("ara", "correct")
+            response_dan = self.lang.get("dan", "correct", actual_word)
+            response_ara = self.lang.get("ara", "correct", actual_word)
         else:
-            special_case_present = self.special_feedback(prediction, actual_word)
+            special_case_present, response_dan, response_ara = self.special_feedback(prediction, actual_phonemes)
             if not special_case_present:
-                self.response_txt_dan = self.lang.get("dan", "incorrect")
-                self.response_txt_ara = self.lang.get("ara", "incorrect")
+                response_dan = self.lang.get("dan", "incorrect", actual_word)
+                response_ara = self.lang.get("ara", "incorrect", actual_word)
 
         return response_dan, response_ara
 
-    def special_feedback(self, result, actual_word):
+    def special_feedback(self, result, actual_phonemes):
         special_feedback_cases = self.lang.get_special("dan")
-        word_phonemes = (self.lang.word_phonemes(actual_word)).split
-        result_phonemes = (self.lang.word_phonemes(result)).split
+        special_num = 0
+
+        actual_phonemes = actual_phonemes.split(" ")
+        predicted_phonemes = result.split(" ")
+
         for special_case in special_feedback_cases:
-            special_index =
-            if special_case.actual == :
-                    pass
-                    return True
-        return False
+            special_response_txt_dan = self.lang.get_special_feedback("dan")[special_num]
+            special_response_txt_ara = self.lang.get_special_feedback("ara")[special_num]
 
+            expected = special_case["expected"]
+            actual = special_case["actual"]
+            index = special_case["index"]
+            special_num = special_num + 1
 
+            if predicted_phonemes[index] == actual and actual_phonemes[index] == expected:
+                response_dan = self.lang.get("dan", "special", special_response_txt_dan)
+                response_ara = self.lang.get("ara", "special", special_response_txt_ara)
 
+                return True, response_dan, response_ara
+
+        return False, "", ""

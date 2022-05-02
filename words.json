@@ -19,12 +19,19 @@
             "default": {
                 "correct": "Du udtalte \"%s\" flydende. Godt klaret.",
                 "incorrect": "Du udtalte ikke \"%s\" helt flydende. Prøv igen!",
-                "special": "Du udtalte ikke ordet helt flydende. %s."
+                "special": "Du udtalte ikke ordet helt flydende. %s.",
             },
             "special": [
                 {
                     "expected": "pʰ",
                     "actual": "p",
+                    "index": 0,
+                    "feedback": "\"p\" blev udtalt som \"b\""
+                },
+                {
+                    "expected": "p",
+                    "actual": "pʰ",
+                    "index": 0,
                     "feedback": "\"p\" blev udtalt som \"b\""
                 }
             ]
@@ -39,6 +46,7 @@
                 {
                     "expected": "pʰ",
                     "actual": "p",
+                    "index": 0,
                     "feedback": "بطلاقة \"P\" لم تنطقت كلمة إجاص بطلاقة"
                 }
             ]

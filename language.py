@@ -27,12 +27,12 @@ class Language:
         words = self.words()
         return words[word]
 
-    def get(self, lang: str, case: str):
+    def get(self, lang: str, case: str, word):
         if self.lang is None:
             return ""
 
         if "response" in self.lang:
-            return self.lang["response"][lang]["default"][case]
+            return self.lang["response"][lang]["default"][case] % word
         else:
             return ""
 
@@ -44,5 +44,15 @@ class Language:
             return self.lang["response"][lang]["special"]
         else:
             return []
+
+    def get_special_feedback(self, lang):
+        special_cases = []
+        if self.lang is None:
+            return special_cases
+
+        if "response" in self.lang:
+            for case in self.lang["response"][lang]["special"]:
+                special_cases.append(case["feedback"])
+            return special_cases
 
 
