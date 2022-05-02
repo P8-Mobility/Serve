@@ -1,4 +1,5 @@
 import configparser
+import json
 import os
 from os import path
 from flask import Flask, jsonify, request
@@ -24,13 +25,8 @@ def models():
 
 @app.route('/words', methods=['GET'])
 def words():
-    the_models = []
-
-    for dirname in os.listdir("models/"):
-        if dirname != ".gitkeep":
-            the_models.append(dirname)
-
-    return jsonify({'status': 'OK', 'result': the_models})
+    words = lang.words()
+    return jsonify({'status': 'OK',  'result': [{key: value} for key, value in words.items()]})
 
 
 @app.route('/predict', methods=['POST'])
