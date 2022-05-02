@@ -4,9 +4,8 @@ from os import path
 from flask import Flask, jsonify, request
 from werkzeug.utils import secure_filename
 import classifier
-from processing.audio import Audio
 import processing.audio as audio
-import processing.transformer as transformer
+from language import Language
 
 config_file = "config.cfg"
 app = Flask(__name__)
@@ -14,6 +13,17 @@ app = Flask(__name__)
 
 @app.route('/models', methods=['GET'])
 def models():
+    the_models = []
+
+    for dirname in os.listdir("models/"):
+        if dirname != ".gitkeep":
+            the_models.append(dirname)
+
+    return jsonify({'status': 'OK', 'result': the_models})
+
+
+@app.route('/words', methods=['GET'])
+def words():
     the_models = []
 
     for dirname in os.listdir("models/"):
@@ -34,6 +44,7 @@ def predict():
     # Args
     args = request.form
     model = args.get('model')
+    word = args.get('word')
 
     if model is None:
         model = ""
@@ -62,6 +73,9 @@ def predict():
     # 4) Predict
     result, model = classifier.predict_word(audio_file, model)
 
+    # % Prepare feedback
+    classifier.prepare_feedback(word, result)
+
     # 5) Housekeeping
     if os.path.exists(filepath):
         os.remove(filepath)
@@ -88,9 +102,12 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read(config_file)
 
+    lang = Language()
+    lang.load("words.json")
+
     # Setup upload folder
     app.config['UPLOAD_FOLDER'] = config['UPLOAD']['folder']
 
-    classifier = classifier.Classifier(config)
+    classifier = classifier.Classifier(config, lang)
     if classifier.load_models() and config.getboolean("WEB", "local"):
         app.run(port=int(config['WEB']['port']), host=str(config['WEB']['host']))

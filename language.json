@@ -1,0 +1,23 @@
+{
+    "app_text": [
+        {
+            "language": "dan",
+            "text": [
+                {"app_name": "/ˈsnak/"},
+                {"record": "Optag udtale"},
+                {"recording": "Optager..."},
+                {"listen": "Lyt"},
+                {"exception_during_upload": "Der er problemer med serveren. Prøv igen om nogle timer."},
+                {"getting_resource": "Evaluerer lydklip…"},
+                {"startText": "Hold knappen nede for at få bedømt din udtale."}
+            ]
+        },
+        {
+            "language": "ara",
+            "text": [
+                {"getting_resource": "تقييم مقطع صوتي…"},
+                {"startText": " اضغط الزر لتقييم نطقك"}
+            ]
+        }
+    ]
+}

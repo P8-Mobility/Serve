@@ -1,0 +1,47 @@
+{
+    "words": [
+        {"word": "pære", "phonemes": "pʰ æː ɐ"},
+        {"word": "bære", "phonemes": "p æː ɐ"},
+        {"word": "lære", "phonemes": "l æː ɐ"},
+        {"word": "skære", "phonemes": "s k æː ɐ"},
+        {"word": "pærerne", "phonemes": "pʰ æː ɐ n ə"},
+        {"word": "bækken", "phonemes": "p ɛ k ŋ"},
+        {"word": "udtale", "phonemes": "u ɤ t s æː l ə"},
+        {"word": "putin", "phonemes": "pʰ u t e n"},
+        {"word": "putin", "phonemes": "pʰ u t e n"},
+        {"word": "ære", "phonemes": "æː ɐ"},
+        {"word": "er", "phonemes": "æ ɐ"},
+        {"word": "myre", "phonemes": "m yː ɐ"},
+        {"word": "mure", "phonemes": "m uː ɐ"}
+    ],
+    "response": {
+        "dan":  {
+            "default": {
+                "correct": "Du udtalte \"%s\" flydende. Godt klaret.",
+                "incorrect": "Du udtalte ikke \"%s\" helt flydende. Prøv igen!",
+                "special": "Du udtalte ikke ordet helt flydende. %s."
+            },
+            "special": [
+                {
+                    "expected": "pʰ",
+                    "actual": "p",
+                    "feedback": "\"p\" blev udtalt som \"b\""
+                }
+            ]
+        },
+        "ara": {
+            "default": {
+                "correct": "لقد نطقت كلمة \"%s\" بطلاقة جيدة. ممتاز.",
+                "incorrect": "نك لم تنطقت كلمة \"%s\" بطلاقة. حاول مرة ثانية !",
+                "special": "م تنطقت كلمة ordet بطلاقة. %s."
+            },
+            "special": [
+                {
+                    "expected": "pʰ",
+                    "actual": "p",
+                    "feedback": "بطلاقة \"P\" لم تنطقت كلمة إجاص بطلاقة"
+                }
+            ]
+        }
+    }
+}
