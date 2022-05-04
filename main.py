@@ -26,7 +26,7 @@ def models():
 @app.route('/words', methods=['GET'])
 def words():
     words = lang.words()
-    return jsonify({'status': 'OK',  'result': [{key: value} for key, value in words.items()]})
+    return jsonify({'status': 'OK',  'result': words})
 
 def setup():
     words = lang.words()

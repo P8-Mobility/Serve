@@ -1,19 +1,18 @@
 {
-    "words": [
-        {"word": "pære", "phonemes": "pʰ æː ɐ"},
-        {"word": "bære", "phonemes": "p æː ɐ"},
-        {"word": "lære", "phonemes": "l æː ɐ"},
-        {"word": "skære", "phonemes": "s k æː ɐ"},
-        {"word": "pærerne", "phonemes": "pʰ æː ɐ n ə"},
-        {"word": "bækken", "phonemes": "p ɛ k ŋ"},
-        {"word": "udtale", "phonemes": "u ɤ t s æː l ə"},
-        {"word": "putin", "phonemes": "pʰ u t e n"},
-        {"word": "putin", "phonemes": "pʰ u t e n"},
-        {"word": "ære", "phonemes": "æː ɐ"},
-        {"word": "er", "phonemes": "æ ɐ"},
-        {"word": "myre", "phonemes": "m yː ɐ"},
-        {"word": "mure", "phonemes": "m uː ɐ"}
-    ],
+    "words": {
+        "pære": "pʰ æː ɐ",
+        "bære": "p æː ɐ",
+        "lære": "l æː ɐ",
+        "skære": "s k æː ɐ",
+        "pærerne": "pʰ æː ɐ n ə",
+        "bækken": "p ɛ k ŋ",
+        "udtale": "u ɤ t s æː l ə",
+        "putin": "pʰ u t e n",
+        "ære": "æː ɐ",
+        "er": "æ ɐ",
+        "myre": "m yː ɐ",
+        "mure": "m uː ɐ"
+    },
     "response": {
         "dan":  {
             "default": {

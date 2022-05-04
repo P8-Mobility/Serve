@@ -16,12 +16,7 @@ class Language:
         f.close()
 
     def words(self):
-        wordDict = {}
-
-        for w in self.lang['words']:
-            wordDict[w["word"]] = w["phonemes"]
-
-        return wordDict
+        return self.lang['words']
 
     def word_phonemes(self, word):
         words = self.words()
