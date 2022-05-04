@@ -38,7 +38,6 @@ def setup():
     return jsonify({'status': 'OK', 'result': { "words": [{key: value} for key, value in words.items()], "language": languages}}) #ToDo: wip needs to be tested further
 
 
-
 @app.route('/predict', methods=['POST'])
 def predict():
     # 1) Fetch and prepare file

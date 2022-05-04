@@ -19,8 +19,7 @@ class Language:
         return self.lang['words']
 
     def word_phonemes(self, word):
-        words = self.words()
-        return words[word]
+        return self.words()
 
     def get(self, lang: str, case: str, word):
         if self.lang is None:
